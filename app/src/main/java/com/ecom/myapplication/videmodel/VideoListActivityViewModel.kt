@@ -21,6 +21,7 @@ class VideoListActivityViewModel : AppBaseViewModel() {
 
     fun initiate(callback: VideoListActivityViewModelCallBack) {
         this.mCallback = callback
+        mCallback.showLoader()
         initiateAPICall(ServiceRepository.GET_VIDEO_FILES)
     }
 
@@ -28,7 +29,6 @@ class VideoListActivityViewModel : AppBaseViewModel() {
         super.initiateAPICall(apiTransactionId)
         if (mCallback.isInternetConnectionSuccess()) {
             viewModelScope.launch {
-                mCallback.showLoader()
                 when (apiTransactionId) {
                     ServiceRepository.GET_VIDEO_FILES -> ServiceRepository.getVideoFiles(this@VideoListActivityViewModel, getHeaderMap(), offset.toString(), limit.toString())
                 }
@@ -72,6 +72,7 @@ class VideoListActivityViewModel : AppBaseViewModel() {
                 if (visibleItemCount + firstVisibleItem >= totalItemCount && firstVisibleItem >= 0 && totalItemCount >= limit) {
                         if (offset <= 1000) {
                             offset += limit
+                            mCallback.showLazyLoader()
                             initiateAPICall(ServiceRepository.GET_VIDEO_FILES)
                         }
                 }
@@ -87,6 +88,8 @@ class VideoListActivityViewModel : AppBaseViewModel() {
         fun showNetworkError()
         fun showAPIError()
 
+        fun showLazyLoader()
+        fun hideLazyLoader()
         fun loadVideoListAdapter(videoFilesList: MutableList<VideoFilesResponseModel>)
         fun onSearchClick()
         fun onCalendarClick()

@@ -1,6 +1,7 @@
 package com.ecom.myapplication.activity
 
 import android.os.Bundle
+import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -79,6 +80,14 @@ class VideoListActivity : BaseActivityViewModel<VideoListActivityViewModel>(),
         showToastMessage(getString(R.string.text_api_error))
     }
 
+    override fun showLazyLoader() {
+        mBinding.progressBar.visibility = View.VISIBLE
+    }
+
+    override fun hideLazyLoader() {
+        mBinding.progressBar.visibility = View.GONE
+    }
+
     override fun onVideoClick(videoFile: VideoFilesResponseModel) {
         showToastMessage(videoFile.id.toString())
     }
@@ -86,6 +95,7 @@ class VideoListActivity : BaseActivityViewModel<VideoListActivityViewModel>(),
 
     private inner class VideoListResponseObserver : Observer<MutableList<VideoFilesResponseModel>> {
         override fun onChanged(videoFilesList: MutableList<VideoFilesResponseModel>) {
+            hideLazyLoader()
             mViewModel.initiateVideoList(videoFilesList)
             mBinding.executePendingBindings()
         }
