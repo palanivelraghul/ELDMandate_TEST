@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">My Application</string>
+    <string name="text_video_files">Video Files</string>
+    <string name="text_no_internet">No Internet Connection</string>
+    <string name="text_api_error">Something went wrong, Please try after some time</string>
+    <string name="text_search">Search</string>
+    <string name="text_calendar">Calender</string>
+</resources>

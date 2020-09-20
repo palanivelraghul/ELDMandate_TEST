@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="callBack"
+            type="com.ecom.myapplication.adapter.VideoFileListAdapter.VideoFileListAdapterCallback" />
+        <variable
+            name="videoFile"
+            type="com.ecom.myapplication.model.responsemodel.VideoFilesResponseModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/density_size_8">
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cv_image"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/density_size_150"
+            android:onClick="@{()-> callBack.onVideoClick(videoFile)}"
+            app:cardCornerRadius="@dimen/density_size_20"
+            app:cardElevation="@dimen/density_size_4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0">
+
+            <ImageView
+                android:id="@+id/img_video_thumbnail"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                tools:ignore="ContentDescription" />
+
+        </androidx.cardview.widget.CardView>
+
+        <TableRow
+            android:id="@+id/tr_time_status"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/density_size_8"
+            app:layout_constraintBottom_toTopOf="@id/tr_time_duration"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/cv_image">
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                tools:text="12/12/12" />
+
+            <ImageView
+                android:id="@+id/img_status"
+                android:layout_width="@dimen/density_size_32"
+                android:layout_height="@dimen/density_size_32"
+                android:src="@drawable/ic_status_downloaded" />
+
+        </TableRow>
+
+        <TableRow
+            android:id="@+id/tr_time_duration"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/density_size_6"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/tr_time_status">
+
+            <TextView
+                android:id="@+id/tv_date_time"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_weight="1"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                tools:text="" />
+
+            <TextView
+                android:id="@+id/tv_video_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:gravity="end"
+                android:textColor="@android:color/darker_gray"
+                android:textSize="@dimen/text_size_20"
+                android:textStyle="bold"
+                tools:text="12:00MB" />
+
+        </TableRow>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
